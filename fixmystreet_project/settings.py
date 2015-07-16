@@ -41,8 +41,8 @@ else:
 
 # VERSION
 import pkg_resources
-VERSION = pkg_resources.require("django-fixmystreet")[0].version
-
+# VERSION = pkg_resources.require("django-fixmystreet")[0].version
+VERSION = '4.0.0dev'
 
 # MEDIA
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', os.path.join(BASE_DIR, 'media'))

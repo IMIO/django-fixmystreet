@@ -1,0 +1,39 @@
+postgis:
+    build: Dockerfiles/postgis/
+    hostname: postgis
+    volumes:
+        - ./postgres_data:/var/lib/postgresql
+# geoserver:
+#     build: Dockerfiles/geoserver/
+#     hostname: geoserver
+#     links:
+#         - postgis
+#     ports:
+#         - 8080:8080
+#     volumes:
+#         - ./geoserver_data:/opt/geoserver/data_dir
+fixmystreet:
+    build: .
+    hostname: fixmystreet
+    environment:
+        - ENV=dev
+        - EMAIL_ADMIN=devs@imio.be
+    links:
+        - postgis
+    ports:
+        - 8000:8000
+    volumes:
+        - .:/opt/fixmystreet/
+    entrypoint:
+        - "/opt/fixmystreet/docker-entrypoint.sh"
+
+# nginx:
+#     image: nginx:latest
+#     ports:
+#         - 80:80
+#     links:
+#         - geonode
+#         - geoserver
+#         - postgis
+#     volumes:
+#         - nginx-default.conf:/etc/nginx/conf.d/default.conf

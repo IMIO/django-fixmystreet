@@ -1,7 +1,7 @@
 .PHONY        = install init html-doc install develop test jenkins createdb dropdb scratchdb clean
 APP_NAME      = apps.fixmystreet apps.backoffice apps.fmsproxy
 INSTALL_PATH  = $(abspath env)
-BIN_PATH      = $(INSTALL_PATH)/bin
+BIN_PATH      = /usr/bin
 SRC_ROOT      = apps
 
 USER          = fixmystreet
@@ -38,7 +38,7 @@ createdb:
 develop: $(BIN_PATH)
 	$(BIN_PATH)/python setup.py develop -Z
 	$(BIN_PATH)/pip install -e .[dev]
-	$(MAKE) migrate
+	# $(MAKE) migrate
 
 dropdb:
 	dropdb $(DBNAME) -U $(DBUSER)
@@ -71,7 +71,7 @@ messages:
 	cd $(SRC_ROOT); $(BIN_PATH)/manage.py compilemessages
 
 migrate:
-	$(BIN_PATH)/manage.py migrate
+	$(BIN_PATH)/python manage.py migrate
 
 migrations:
 	$(BIN_PATH)/manage.py makemigrations
@@ -85,5 +85,10 @@ test: $(BIN_PATH)/manage.py
 test-js:
 	testem ci -t apps/fixmystreet/static/tests/index.html
 
+
 test-js-tdd:
 	testem tdd -t apps/fixmystreet/static/tests/index.html
+
+initcache:
+	$(BIN_PATH)/manage.py createcachetable fms_cache
+
