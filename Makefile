@@ -101,7 +101,7 @@ django_fixmystreet/local_settings.py:
 docker-init: django_fixmystreet/local_settings.py postgres_data
 	docker-compose up postgis &
 	sleep 15
-	docker-compose run --rm --entrypoint python fixmystreet manage.py syncdb
+	docker-compose run --rm --entrypoint python fixmystreet manage.py syncdb --noinput
 	docker-compose run --rm --entrypoint python fixmystreet manage.py migrate
 	docker-compose run --rm --entrypoint python fixmystreet manage.py loaddata apps/fixmystreet/fixtures/*
 	docker-compose stop

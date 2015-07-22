@@ -1,6 +1,4 @@
 
-[![Requirements Status](https://requires.io/github/CIRB/django-fixmystreet/requirements.png?branch=master)](https://requires.io/github/CIRB/django-fixmystreet/requirements/?branch=master)
-
 Thanks
 ======
 
@@ -10,53 +8,22 @@ It is a fork of http://fixmystreet.ca (https://github.com/visiblegovernment/djan
 
 This project in place use Urbis for map, search and locate engine (http://geoserver.gis.irisnet.be/).
 
-[the technical documentation](http://fixmystreet.irisnetlab.be/admin/doc/)
 
 [![data model](https://raw.github.com/CIRB/django-fixmystreet/master/data-model.png)](http://fixmystreet.irisnetlab.be/admin/doc/)
 
 
 Installation
 ============
+First install docker and docker-compose.
 
 ```bash
-$ git clone git@github.com:CIRB/django-fixmystreet.git
-$ make develop
-$ make run
-$ env/bin/manage.py shell
+$ git clone git@github.com:IMIO/django-fixmystreet.git
+$ make docker-init
+$ make docker-run
 ```
 
-On fresh Ubuntu install:
-
-```
-sudo apt-get install python-dev python-virtualenv postgresql-server-dev-9.4 libgeos-3.4.2 libgdal1h git make gcc nodejs npm vim
-```
-
-Ensure libxml2-dev, psycopg2 and GeoDjango are installed.
-
-You need a Postgis server, for GeoDjango installation:
-
-https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/
-
-- GEOS https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#geos
-- PROJ.4 https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#proj4
-- PostGIS https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#postgis
-- (install psycopg2?)
-- Create PostGIS template https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/#spatialdb-template
-
-may be incompatibility between postgis and psycopg2 on postgresql 9.1
-if message is like "invalid byte sequence for encoding UTF8: 0x00"
-need to apply this patch:
-
-https://code.djangoproject.com/ticket/16778
-
-After install, create the database:
-
-```bash
-
-$ make createdb
-$ bin/django loaddata sample # if you want some sample data to work with
-$ cp local_settings_staging.py local_settings.py # and edit db connection settings
-```
+Variables
+============
 
 In deploy environment, settings are given by system environment variables.
 
@@ -75,31 +42,6 @@ DATABASE_PASSWORD
 DATABASE_PORT
 DATABASE_HOST
 ```
-
-To initialize variables on the server:
-
-```bash
-$ . ~/env
-```
-
-
-Continuous Integration, Deployment and Delivery
-===============================================
-
-Jenkins
--------
-
-This project is tested under the Jenkins CI at http://jenkins.cirb.lan/job/django-fixmystreet/
-It will be automatically built on every push on GitHub, if tests succeed
-the project will be deployed.
-
-
-Branching tagging and deployment
---------------------------------
-
-dev server will be automatically updated with the latest commit from GitHub,
-staging will be automatically updated with the latest tagged commit from GitHub
-production will be manually updated with the fixed tagged commit from GitHub
 
 
 Useful commands
