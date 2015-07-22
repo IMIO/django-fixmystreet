@@ -1,0 +1,19 @@
+postgis:
+    build: Dockerfiles/postgis/
+    hostname: postgis
+    volumes:
+        - ./postgres_data:/var/lib/postgresql
+fixmystreet:
+    build: .
+    hostname: fixmystreet
+    environment:
+        - ENV=local
+        - EMAIL_ADMIN=devs@imio.be
+    links:
+        - postgis
+    ports:
+        - 8000:8000
+    volumes:
+        - .:/opt/fixmystreet/
+    entrypoint:
+        - "/opt/fixmystreet/docker-entrypoint.sh"
