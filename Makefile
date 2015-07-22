@@ -89,6 +89,25 @@ test-js:
 test-js-tdd:
 	testem tdd -t apps/fixmystreet/static/tests/index.html
 
-initcache:
-	$(BIN_PATH)/manage.py createcachetable fms_cache
 
+
+
+postgres_data:
+	mkdir postgres_data
+
+fixmystreet_project/local_settings.py:
+	cp fixmystreet_project/local_settings_staging.py fixmystreet_project/local_settings.py
+
+docker-init: fixmystreet_project/local_settings.py postgres_data
+	docker-compose up postgis &
+	sleep 15
+	docker-compose run --rm --entrypoint python fixmystreet manage.py migrate
+	docker-compose run --rm --entrypoint python fixmystreet manage.py loaddata apps/fixmystreet/fixtures/*
+	docker-compose stop
+
+docker-clean:
+	docker-compose stop
+	docker-compose rm
+
+docker-run:
+	docker-compose up
