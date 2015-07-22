@@ -2,8 +2,8 @@
 {
   "fields": {
     "username": "admin",
-    "first_name": "",
-    "last_name": "",
+    "first_name": "Admin",
+    "last_name": "Fms",
     "is_active": true,
     "is_superuser": true,
     "is_staff": true,
@@ -11,7 +11,7 @@
     "groups": [],
     "user_permissions": [],
     "password": "pbkdf2_sha256$20000$ZJZ32P94oUYd$PTdajbKF4G42HEc6Oi8mFDgf0YqHF1hfVB/mp6BkmUU=",
-    "email": "afuca@cirb.brussels",
+    "email": "bsu@imio.be",
     "date_joined": "2015-07-20T10:23:28.431"
   },
   "model": "auth.user",

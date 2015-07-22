@@ -1,20 +1,18 @@
-import os
-
 DATABASES = {
    'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'fixmystreet',
-        'USER': '###',
-        'PASSWORD': '###',
-        'HOST': 'localhost',
+        'USER': 'postgis',
+        'PASSWORD': 'postgis',
+        'HOST': 'postgis',
         'PORT': 5432,
-        'OPTIONS': {
-            'autocommit': True
-        }
+        # 'OPTIONS': {
+        #     'autocommit': True
+        # }
    }
 }
 
 EMAIL_HOST = "relay.irisnet.be"
-EMAIL_ADMIN = "###@cirb.irisnet.be"
-ADMIN_EMAIL = "###@cirb.irisnet.be"
+EMAIL_ADMIN = "bsu@imio.be"
+ADMIN_EMAIL = "bsu@imio.be"
 
